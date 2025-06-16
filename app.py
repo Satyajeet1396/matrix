@@ -77,7 +77,14 @@ def main():
 
     st.title("🔢 Integer Matrix Generator")
     st.markdown("Generate matrices with **integer values only** (0, 1, 2, 3) and custom average ranges")
+    if st.sidebar.button("🎲 Generate New Matrix", type="primary", key="generate_btn"):
+        # Generate random target average within specified range
+        target_avg = random.uniform(min_avg_range, max_avg_range)
 
+        try:
+            with st.spinner('Generating integer matrix...'):
+                matrix = generate_integer_matrix_with_target_average(rows, cols, target_avg)
+              
     # Sidebar for input parameters
     st.sidebar.header("Matrix Parameters")
 
@@ -99,7 +106,7 @@ def main():
         "Minimum Average", 
         min_value=float(min_possible), 
         max_value=float(max_possible), 
-        value=1.5, 
+        value=2.0, 
         step=0.1,
         format="%.1f"
     )
